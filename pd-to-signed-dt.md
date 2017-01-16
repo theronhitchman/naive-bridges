@@ -42,3 +42,82 @@ As such, the signed DT code will be a list of symbols that look like this:
 
 Each 4-tuple in the PD code corresponds to a crossing, so it will give us one
 piece of the DT code.
+
+If we have [m,k,m+1,k'], then we will construct the corresponding piece of
+signed DT from this in the following way:
+
+We will consider the following three binary choices, for
+a total of 8 theoretically possible options in combination:
+
+    - m is either even or odd;
+    - k is either even or odd;
+    - k' is either k+1 or k-1.
+
+Run through the eight one at a time:
+
+1. m, k both even, k'=k+1    
+
+    this symbol looks like [e,e',e+1,e'+1],
+    which is impossible by the loop lemma.
+
+2. m, k both even, k'=k-1
+
+    the input symbol is [e,e',e+1,e'-1]
+    the output symbol is
+
+    e'-1
+    u e
+     +
+
+3. m even, k odd, k'=k+1
+
+    the input symbol is [e,o,e+1,o+1]
+    the output symbol is
+
+     o
+    ue
+     -
+
+4. m even, k odd, k'=k-1
+
+    the input symbol is [e,0,e+1,o-1] = [e,e'+1,e+1,e']
+    this is impossible by the loop lemma
+
+5. m odd, k even, k'=k+1
+
+    the input symbol is [o,e,o+1,e+1]
+    the output symbol is
+
+    uo
+     e
+     -
+
+
+6. m odd, k even, k'=k-1
+
+    the input symbol is [o,e,o+1,e-1]
+    this is impossible by the loop lemma
+
+7. m, k both odd k'=k+1
+
+    the input symbol is [o,o',o+1,o'+1]
+    this is impossible by the loop lemma
+
+8. m, k both odd, k'=k-1
+
+    the input symbol is [o,o',o+1,o'-1]
+    the output symbol is
+
+    u o
+    o'-1
+     +
+
+Now assemble the signed DT code by placing these new symbols in numerical order
+of the top line of the code.
+
+#### Special Note:
+
+The PD 4-tuple which has 2n and 1 in it should be considered instead as if it
+has 2n and 2n+1 in it.
+
+(I am not sure that is relevant anymore.)
